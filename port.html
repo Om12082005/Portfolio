@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Om Gai | Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Reset & base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #eee;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #00ffc8;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    a:hover {
+      color: #00bfa5;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      flex-grow: 1;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid #3c2f2f;
+      position: sticky;
+      top: 0;
+      background: #373838cc;
+      z-index: 1000;
+    }
+    header h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: #00ffc8;
+    }
+    nav a {
+      margin-left: 25px;
+      font-weight: 600;
+    }
+    nav a.active {
+      border-bottom: 2px solid #00ffc8;
+    }
+
+    /* Profile Section */
+    .profile {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 60px;
+      gap: 40px;
+      justify-content: center;
+    }
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,255,200,0.7);
+      border: 4px solid #00ffc8;
+      flex-shrink: 0;
+    }
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .profile-info {
+      max-width: 600px;
+    }
+    .profile-info h2 {
+      font-size: 2.8rem;
+      color: #00ffc8;
+      margin-bottom: 8px;
+    }
+    .profile-info h3 {
+      font-weight: 400;
+      color: #a5d6ce;
+      margin-bottom: 15px;
+    }
+    .profile-info p {
+      font-size: 1.1rem;
+      color: #ddd;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    /* Hero Btn */
+    .btn-primary {
+      display: inline-block;
+      padding: 15px 40px;
+      background: #00ffc8;
+      color: #152b33;
+      font-weight: 600;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0, 255, 200, 0.6);
+      transition: background 0.3s;
+    }
+    .btn-primary:hover {
+      background: #00bfa5;
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid #444;
+    }
+    section:last-child {
+      border-bottom: none;
+    }
+    section h3 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: #00ffc8;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+    .project-card {
+      background: #203a43;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0, 255, 200, 0.7);
+    }
+    .project-card h4 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      color: #00ffc8;
+    }
+    .project-card p {
+      font-size: 1rem;
+      color: #ddd;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .project-links {
+      display: flex;
+      gap: 20px;
+    }
+    .project-links a {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #00ffc8;
+      border-bottom: 2px solid transparent;
+      transition: border-bottom-color 0.3s;
+    }
+    .project-links a:hover {
+      border-bottom-color: #00bfa5;
+    }
+
+    /* Skills with progress bars */
+    .skills-list {
+      max-width: 700px;
+      margin: auto;
+      display: grid;
+      gap: 18px;
+    }
+    .skill {
+      display: flex;
+      flex-direction: column;
+    }
+    .skill-name {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #00ffc8;
+      font-size: 1.1rem;
+    }
+    .progress-bar {
+      background: #152b33;
+      border-radius: 15px;
+      height: 20px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .progress {
+      height: 100%;
+      background: #00ffc8;
+      width: 0;
+      border-radius: 15px 0 0 15px;
+      transition: width 1.5s ease-in-out;
+    }
+
+    /* Experience Cards */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .experience-item {
+      background: #203a43;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .experience-item h4 {
+      color: #00ffc8;
+      margin-bottom: 6px;
+      font-size: 1.4rem;
+    }
+    .experience-item span {
+      font-style: italic;
+      color: #a5d6ce;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .experience-item p {
+      font-size: 1rem;
+      color: #ddd;
+    }
+
+    /* Certifications */
+    .certifications {
+      max-width: 800px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .cert-card {
+      background: #203a43;
+      padding: 20px 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      flex: 1 1 250px;
+      color: #ddd;
+      text-align: center;
+      transition: box-shadow 0.3s;
+    }
+    .cert-card:hover {
+      box-shadow: 0 10px 30px rgba(0,255,200,0.7);
+    }
+    .cert-card h4 {
+      color: #00ffc8;
+      margin-bottom: 10px;
+    }
+    .cert-card p {
+      font-size: 0.95rem;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 25px;
+    }
+    .testimonial-card {
+      background: #203a43;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      font-style: italic;
+      color: #ddd;
+      position: relative;
+      transition: transform 0.3s;
+    }
+    .testimonial-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,255,200,0.7);
+    }
+    .testimonial-author {
+      margin-top: 15px;
+      font-weight: 700;
+      color: #00ffc8;
+      text-align: right;
+    }
+
+    /* Blog preview */
+    .blog-preview {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 25px;
+    }
+    .blog-card {
+      background: #203a43;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      color: #ddd;
+      transition: box-shadow 0.3s;
+    }
+    .blog-card:hover {
+      box-shadow: 0 10px 30px rgba(0,255,200,0.7);
+    }
+    .blog-card h5 {
+      margin-bottom: 10px;
+      color: #00ffc8;
+    }
+    .blog-card p {
+      font-size: 0.95rem;
+    }
+
+    /* Contact form */
+    form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    form label {
+      font-weight: 600;
+      color: #00ffc8;
+      margin-bottom: 6px;
+    }
+    form input, form textarea {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      resize: vertical;
+      background: #152b33;
+      color: #eee;
+    }
+    form input::placeholder, form textarea::placeholder {
+      color: #aaa;
+    }
+    form input:focus, form textarea:focus {
+      outline: 2px solid #00bfa5;
+      background: #1c3b48;
+    }
+    form button {
+      background: #00ffc8;
+      border: none;
+      padding: 15px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #152b33;
+      box-shadow: 0 5px 15px rgba(0,255,200,0.6);
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background: #00bfa5;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px 0;
+      font-size: 0.9rem;
+      color: #666;
+      background: #152b33cc;
+      margin-top: auto;
+    }
+    footer a {
+      margin: 0 12px;
+      font-size: 1.3rem;
+    }
+
+    /* Responsive Nav Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background: #00ffc8;
+      border-radius: 3px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    @media(max-width: 768px) {
+      nav {
+        position: fixed;
+        top: 65px;
+        right: 0;
+        background: #203a43dd;
+        width: 200px;
+        height: calc(100% - 65px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        border-left: 2px solid #00ffc8;
+        z-index: 10000;
+      }
+      nav.active {
+        transform: translateX(0);
+      }
+      nav a {
+        margin: 20px 0;
+        font-size: 1.2rem;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="container">
+    <h1>Om Gai</h1>
+
+    <div class="menu-toggle" id="menu-toggle" tabindex="0" aria-label="Toggle navigation menu">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <nav id="nav">
+      <a href="#about" class="active">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    <section id="about" class="profile">
+      <div class="profile-photo" aria-label="Profile Photo">
+        <img src="dummy image.png" alt="" />
+      </div>
+      <div class="profile-info">
+        <h2>Om Gai</h2>
+        <h3>B.Tech Computer Engineering Student</h3>
+        <p>Passionate about software development, automation, and web technologies. Skilled in programming languages like C, C++, HTML, CSS, and MS Office tools. Experienced in creating efficient, user-friendly applications and websites. Always eager to learn and take on new challenges in tech.</p>
+        <a href="#contact" class="btn-primary" aria-label="Contact Om">Get In Touch</a>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h3>Projects</h3>
+      <div class="projects-grid">
+        <div class="project-card" tabindex="0">
+          <h4>Personal Portfolio Website</h4>
+          <p>A fully responsive portfolio showcasing my skills, projects, and experience using HTML, CSS, and JavaScript.</p>
+          <div class="project-links">
+            <a href="https://github.com/Om12082005" target="_blank" rel="noopener noreferrer" aria-label="View source code on GitHub">Source Code</a>
+            <a href="https://Om12082005.github.io/portfolio/" target="_blank" rel="noopener noreferrer" aria-label="View live project">Live Demo</a>
+          </div>
+        </div>
+        <div class="project-card" tabindex="0">
+          <h4>Excel Data Automation</h4>
+          <p>Automated complex data analysis workflows using Excel macros and VBA to save time and reduce errors.</p>
+          <div class="project-links">
+            <a href="#" aria-label="View project details">Details</a>
+          </div>
+        </div>
+        <div class="project-card" tabindex="0">
+          <h4>Library Management System</h4>
+          <p>Developed a console-based library system in C++ for managing book inventory and member data.</p>
+          <div class="project-links">
+            <a href="#" aria-label="View project details">Details</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h3>Skills</h3>
+      <div class="skills-list">
+        <div class="skill">
+          <span class="skill-name">MS Excel</span>
+          <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+        </div>
+        <div class="skill">
+          <span class="skill-name">MS Word</span>
+          <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+        </div>
+        <div class="skill">
+          <span class="skill-name">MS PowerPoint</span>
+          <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+        </div>
+        <div class="skill">
+          <span class="skill-name">C</span>
+          <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+        </div>
+        <div class="skill">
+          <span class="skill-name">C++</span>
+          <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+        </div>
+        <div class="skill">
+          <span class="skill-name">HTML</span>
+          <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+        </div>
+        <div class="skill">
+          <span class="skill-name">CSS</span>
+          <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+        </div>
+        <div class="skill">
+          <span class="skill-name">JavaScript</span>
+          <div class="progress-bar"><div class="progress" style="width: 65%;"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h3>Experience</h3>
+      <div class="experience-list">
+        <div class="experience-item" tabindex="0">
+          <h4>Internship - Software Developer</h4>
+          <span>tantrata solutions pvt ltd, June 2024 - August 2024</span>
+          <p>Worked on developing internal tools using C++ and improved data processing efficiency by 30% through algorithm optimization.</p>
+        </div>
+        <div class="experience-item" tabindex="0">
+          <h4>Campus Volunteer</h4>
+          <span>zeal college of engineering &research  , 2023-2024</span>
+          <p>Organized coding workshops and tech events, increasing student participation by 40% and fostering a collaborative learning environment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <h3>Certifications</h3>
+      <div class="certifications">
+        <div class="cert-card" tabindex="0">
+          <h4>Microsoft Office Specialist: Excel Associate</h4>
+          <p>Certified in Microsoft Excel with advanced skills in data analysis and automation.</p>
+        </div>
+        <div class="cert-card" tabindex="0">
+          <h4>Certified C++ Programmer</h4>
+          <p>Successfully completed an advanced C++ programming certification covering STL, OOP, and multithreading.</p>
+        </div>
+        <div class="cert-card" tabindex="0">
+          <h4>Web Development Bootcamp</h4>
+          <p>Completed an intensive web development course covering HTML, CSS, JavaScript, and responsive design.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials">
+      <h3>Testimonials</h3>
+      <div class="testimonials">
+        <div class="testimonial-card" tabindex="0">
+          "Om is a dedicated developer with strong problem-solving skills. His work ethic is excellent."
+          <div class="testimonial-author">- John Doe, Mentor</div>
+        </div>
+        <div class="testimonial-card" tabindex="0">
+          "A talented student who consistently delivers quality projects on time."
+          <div class="testimonial-author">- Jane Smith, Project Manager</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog">
+      <h3>Blog</h3>
+      <div class="blog-preview">
+        <div class="blog-card" tabindex="0">
+          <h5>Getting Started with Progressive Web Apps</h5>
+          <p>An introduction to PWAs and how they enhance modern web development.</p>
+          <a href="#" aria-label="Read blog post about PWAs">Read More</a>
+        </div>
+        <div class="blog-card" tabindex="0">
+          <h5>Tips for Effective C++ Coding</h5>
+          <p>Best practices and tips to write clean and efficient C++ code.</p>
+          <a href="#" aria-label="Read blog post about C++ tips">Read More</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3>Contact Me</h3>
+      <form onsubmit="submitForm(event)" aria-label="Contact form">
+        <label for="name">Name</label>
+        <input id="name" type="text" required placeholder="Your Name" />
+
+        <label for="email">Email</label>
+        <input id="email" type="email" required placeholder="Your Email" />
+
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" required placeholder="Your Message"></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+      <p style="text-align:center; margin-top: 15px; color:#00ffc8;">
+        Or email me directly at <a href="mailto:omgai@example.com">omgai@example.com</a>
+      </p>
+      <p style="text-align:center; font-size: 1.5rem; margin-top: 10px;">
+        <a href="#" aria-label="LinkedIn Profile" style="margin: 0 10px;">🔗</a>
+        <a href="#" aria-label="GitHub Profile" style="margin: 0 10px;">🐱</a>
+        <a href="#" aria-label="Twitter Profile" style="margin: 0 10px;">🐦</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 Om Gai | Connect on 
+      <a href="https://www.linkedin.com/in/om-gai-8ba0bb333?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn">LinkedIn</a> | 
+      <a href="https://github.com/Om12082005" aria-label="GitHub">GitHub</a> | 
+      <a href="https://x.com/jayOm788?t=07pbsQFMuxBMwYUgRrI8RA&s=09" aria-label="Twitter">Twitter</a>
+    </p>
+  </footer>
+
+  <script>
+    // Responsive nav toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
+    menuToggle.addEventListener('keypress', e => {
+      if (e.key === 'Enter') nav.classList.toggle('active');
+    });
+
+    // Form submission dummy handler
+    function submitForm(e) {
+      e.preventDefault();
+      alert('Thank you for your message! I will get back to you soon.');
+      e.target.reset();
+    }
+
+    // Animate skills progress bars on scroll into view
+    const skills = document.querySelectorAll('.progress');
+    function animateSkills() {
+      skills.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => {
+          bar.style.width = width;
+        }, 300);
+      });
+    }
+    window.addEventListener('load', animateSkills);
+  </script>
+</body>
+</html>
